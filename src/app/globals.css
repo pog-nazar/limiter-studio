@@ -1,26 +1,83 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    box-sizing: border-box;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: #0f0f0f;
+    color: #fff;
+    font-family: var(--font-inter, system-ui, sans-serif);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (hover: hover) {
+    body { cursor: none; }
+    a, button { cursor: none; }
+  }
+
+  ::selection {
+    background: #fff;
+    color: #0f0f0f;
+  }
+
+  ::-webkit-scrollbar { width: 2px; }
+  ::-webkit-scrollbar-track { background: #0f0f0f; }
+  ::-webkit-scrollbar-thumb { background: #444; }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 24s linear infinite;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Easter Egg Stage Animations ─────────────────────────────────────────── */
+.easter-monster {
+  animation: easter-monster-pulse 2.2s ease-in-out infinite;
+}
+
+.easter-evil {
+  animation: easter-evil-pulse 1.6s ease-in-out infinite;
+}
+
+.easter-cosmic {
+  animation: easter-cosmic-shift 5s ease infinite, easter-cosmic-glow 3s ease-in-out infinite;
+}
+
+@keyframes easter-monster-pulse {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(185,28,28,0.6)); }
+  50%       { filter: drop-shadow(0 0 14px rgba(185,28,28,1)) drop-shadow(0 0 30px rgba(185,28,28,0.45)); }
+}
+
+@keyframes easter-evil-pulse {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(220,38,38,0.75)) drop-shadow(0 0 22px rgba(220,38,38,0.3)); }
+  50%       { filter: drop-shadow(0 0 20px rgba(220,38,38,1)) drop-shadow(0 0 55px rgba(220,38,38,0.65)); }
+}
+
+@keyframes easter-cosmic-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+@keyframes easter-cosmic-glow {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(129,140,248,0.7)) drop-shadow(0 0 18px rgba(167,139,250,0.35)); }
+  50%       { filter: drop-shadow(0 0 18px rgba(129,140,248,1)) drop-shadow(0 0 48px rgba(167,139,250,0.65)) drop-shadow(0 0 75px rgba(34,211,238,0.25)); }
 }
