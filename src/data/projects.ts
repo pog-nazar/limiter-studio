@@ -11,21 +11,39 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/pog-nazar/nyam-pizza",
   },
   {
-    id: "logoipsum",
-    title: "Logoipsum",
+    id: "svitlachok-website",
+    title: "Svitlachok",
     description:
-      "Лендінг SaaS-платформи для управління підписками: аналітика, бенчмаркінг, аудит цін і утримання клієнтів.",
-    tags: ["HTML", "CSS"],
-    liveUrl: "https://pog-nazar.github.io/logoipsum/",
-    repoUrl: "https://github.com/pog-nazar/logoipsum",
+      "Сучасний сайт для бренду Світлячок. TypeScript, акцент на анімаціях та UX.",
+    tags: ["TypeScript", "CSS"],
+    liveUrl: "https://pog-nazar.github.io/svitlachok-website/",
+    repoUrl: "https://github.com/pog-nazar/svitlachok-website",
   },
   {
-    id: "madelyn-torff",
-    title: "Madelyn Torff",
+    id: "nigel-braithwaite-housing",
+    title: "Nigel Braithwaite",
     description:
-      "Портфоліо-сайт UI/UX дизайнера: галерея проєктів, секція про себе та форма для зв'язку.",
+      "Лендінг агентства нерухомості з каталогом об'єктів та формою зв'язку.",
     tags: ["HTML", "CSS"],
-    liveUrl: "https://pog-nazar.github.io/madelyn-torff/",
-    repoUrl: "https://github.com/pog-nazar/madelyn-torff",
+    liveUrl: "https://pog-nazar.github.io/nigel-braithwaite-housing/",
+    repoUrl: "https://github.com/pog-nazar/nigel-braithwaite-housing",
+  },
+  {
+    id: "faceNbody",
+    title: "Face & Body",
+    description:
+      "Сайт школи масажу: програми курсів, викладачі, онлайн-запис та держдиплом.",
+    tags: ["HTML", "CSS"],
+    liveUrl: "https://pog-nazar.github.io/faceNbody/",
+    repoUrl: "https://github.com/pog-nazar/faceNbody",
+  },
+  {
+    id: "massage-website",
+    title: "Serenity Salon",
+    description:
+      "Преміум масажний салон у Києві: послуги, ціни та онлайн-запис до спеціаліста.",
+    tags: ["HTML", "CSS"],
+    liveUrl: "https://pog-nazar.github.io/massage-website/",
+    repoUrl: "https://github.com/pog-nazar/massage-website",
   },
 ];

@@ -6,7 +6,7 @@ import { MarqueeText } from "@/components/MarqueeText";
 import { MagneticButton } from "@/components/MagneticButton";
 import { TELEGRAM_URL } from "@/lib/constants";
 
-const HEADING_LINES = ["РОЗРОБЛЯЮ", "САЙТИ ЩО", "ПРОДАЮТЬ."];
+const HEADING_LINES = ["РОЗРОБЛЯЄМО", "САЙТИ ЩО", "ПРОДАЮТЬ."];
 
 export function Hero() {
   const headingRef = useRef(null);
@@ -51,7 +51,7 @@ export function Hero() {
                   ease: [0.22, 1, 0.36, 1],
                   delay: 0.1 + i * 0.11,
                 }}
-                className="text-[clamp(3.2rem,11vw,10.5rem)] font-black tracking-tight leading-[0.92] text-white"
+                className="text-[clamp(2.4rem,11vw,10.5rem)] font-black tracking-tight leading-[0.92] text-white"
               >
                 {line}
               </motion.h1>
