@@ -3,4 +3,50 @@
   publish = "out"
 
 [build.environment]
+  # Next 16 вимагає Node >= 20.9. Гілка 20 у Netlify давно вища.
   NODE_VERSION = "20"
+
+# Заголовки задаються тут, а не в next.config: при output: "export"
+# ключ `headers` не підтримується — сервера, який би їх віддавав, немає.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+
+# Строгого CSP свідомо немає: він ламає інлайн-скрипти Meta Pixel і GA,
+# а налаштувати його коректно без сервера й без звітів — окрема робота.
+
+# OG-картинки Next генерує у файли БЕЗ розширення (out/opengraph-image).
+# Netlify визначає тип за розширенням, тож без цього віддасть octet-stream
+# і краулер Facebook відкине прев'ю. Тип задаємо руками.
+[[headers]]
+  for = "/opengraph-image"
+  [headers.values]
+    Content-Type = "image/png"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/lp/opengraph-image"
+  [headers.values]
+    Content-Type = "image/png"
+    Cache-Control = "public, max-age=86400"
+
+# Файли з хешем в імені можна кешувати назавжди.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+# HTML — завжди свіжий, інакше після деплою люди бачитимуть стару сторінку.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

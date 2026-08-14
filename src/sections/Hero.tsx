@@ -5,8 +5,10 @@ import { motion, useInView } from "framer-motion";
 import { MarqueeText } from "@/components/MarqueeText";
 import { MagneticButton } from "@/components/MagneticButton";
 import { TELEGRAM_URL } from "@/lib/constants";
+import { EASE } from "@/lib/motion";
+import { CONTAINER } from "@/lib/styles";
 
-const HEADING_LINES = ["РОЗРОБЛЯЄМО", "САЙТИ ЩО", "ПРОДАЮТЬ."];
+const HEADING_LINES = ["РОЗРОБЛЯЄМО", "САЙТИ, ЩО", "ПРОДАЮТЬ."];
 
 export function Hero() {
   const headingRef = useRef(null);
@@ -17,10 +19,10 @@ export function Hero() {
       {/* Subtle ambient glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] rounded-full bg-white/[0.025] blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-[#f59e0b]/[0.06] blur-[100px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/[0.06] blur-[100px]" />
       </div>
 
-      <div className="flex-1 flex flex-col justify-center max-w-[1400px] mx-auto px-6 sm:px-10 w-full pt-24 pb-10 relative">
+      <div className={`${CONTAINER} flex-1 flex flex-col justify-center w-full pt-24 pb-10 relative`}>
         {/* Available badge */}
         <motion.div
           initial={{ opacity: 0, y: -8 }}
@@ -48,7 +50,7 @@ export function Hero() {
                 animate={inView ? { y: 0 } : {}}
                 transition={{
                   duration: 0.85,
-                  ease: [0.22, 1, 0.36, 1],
+                  ease: EASE,
                   delay: 0.1 + i * 0.11,
                 }}
                 className="text-[clamp(2.4rem,11vw,10.5rem)] font-black tracking-tight leading-[0.92] text-white"
@@ -61,17 +63,6 @@ export function Hero() {
 
         {/* Bottom row */}
         <div className="mt-12 sm:mt-16 flex flex-col sm:flex-row sm:items-end justify-between gap-8">
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.7 }}
-            className="text-sm text-white/60 max-w-xs leading-relaxed"
-          >
-            Landing page, e-commerce, веб-застосунки.
-            <br />
-            Від дизайну до деплою — без посередників.
-          </motion.p>
-
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -93,6 +84,17 @@ export function Hero() {
               Telegram →
             </MagneticButton>
           </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.7 }}
+            className="text-sm text-white/60 max-w-xs leading-relaxed sm:text-right"
+          >
+            Landing page, e-commerce, веб-застосунки.
+            <br />
+            Від дизайну до деплою — без посередників.
+          </motion.p>
         </div>
       </div>
 

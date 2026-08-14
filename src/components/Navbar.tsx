@@ -3,13 +3,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MagneticButton } from "@/components/MagneticButton";
-import { TELEGRAM_URL } from "@/lib/constants";
-
-const links = [
-  { label: "Послуги", href: "#services" },
-  { label: "Портфоліо", href: "#portfolio" },
-  { label: "Контакт", href: "#contact" },
-];
+import { NAV_LINKS, TELEGRAM_URL } from "@/lib/constants";
+import { EASE } from "@/lib/motion";
+import { CONTAINER } from "@/lib/styles";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -24,17 +20,17 @@ export function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-[#0f0f0f]/85 backdrop-blur-md border-b border-white/[0.08]" : ""
+        scrolled ? "bg-ink/85 backdrop-blur-md border-b border-white/[0.08]" : ""
       }`}
     >
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 h-16 flex items-center justify-between">
+      <div className={`${CONTAINER} h-16 flex items-center justify-between`}>
         <a href="#" className="font-black text-white text-base tracking-tight">
           Limiter<span className="text-white/40 font-light"> studio</span>
         </a>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
+          {NAV_LINKS.map((l) => (
             <a
               key={l.href}
               href={l.href}
@@ -90,11 +86,11 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden overflow-hidden bg-[#0f0f0f] border-b border-white/10"
+            transition={{ duration: 0.25, ease: EASE }}
+            className="md:hidden overflow-hidden bg-ink border-b border-white/10"
           >
             <div className="px-6 pb-6 pt-2 flex flex-col gap-1">
-              {links.map((l) => (
+              {NAV_LINKS.map((l) => (
                 <a
                   key={l.href}
                   href={l.href}

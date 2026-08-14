@@ -5,7 +5,11 @@ export interface Project {
   tags: string[];
   image?: string;
   liveUrl?: string;
-  repoUrl?: string;
+  /** Ніша клієнта — підпис над кейсом на посадковій. */
+  niche?: string;
+  /** Формат «Задача / Рішення» для секції кейсів на /lp. */
+  task?: string;
+  solution?: string;
 }
 
 export interface Service {

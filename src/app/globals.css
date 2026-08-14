@@ -4,6 +4,12 @@
   --font-sans: var(--font-inter);
 }
 
+@theme {
+  --color-ink: #0f0f0f;
+  --color-panel: #161616;
+  --color-accent: #f59e0b;
+}
+
 @layer base {
   * {
     box-sizing: border-box;
@@ -23,6 +29,8 @@
   @media (hover: hover) {
     body { cursor: none; }
     a, button { cursor: none; }
+    /* Полям вводу потрібен справжній каретка-курсор, інакше форму важко заповнювати. */
+    input, textarea, select { cursor: auto; }
   }
 
   ::selection {
@@ -33,6 +41,26 @@
   ::-webkit-scrollbar { width: 2px; }
   ::-webkit-scrollbar-track { background: #0f0f0f; }
   ::-webkit-scrollbar-thumb { background: #444; }
+}
+
+/* Системне «зменшити рух». Тут вимикаємо тільки CSS-анімації — за framer-motion
+   відповідає MotionConfig reducedMotion="user" у MotionProvider. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .marquee-track,
+  .easter-monster,
+  .easter-evil,
+  .easter-cosmic,
+  .animate-pulse {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @keyframes marquee {
