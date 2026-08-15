@@ -12,7 +12,7 @@ import { CARD } from "@/lib/styles";
  * Явні id, а не перші три з масиву: порядок на головній сторінці
  * не повинен непомітно змінювати те, що бачить рекламний трафік.
  */
-const SHOWN_IDS = ["nyam-pizza", "massage-website", "faceNbody"];
+const SHOWN_IDS = ["nyam-pizza", "massage-website", "svitlachok-website"];
 
 export function LpCases() {
   const shown = SHOWN_IDS.map((id) => projects.find((p) => p.id === id)).filter(

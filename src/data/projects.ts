@@ -5,6 +5,7 @@ export const projects: Project[] = [
     id: "nyam-pizza",
     title: "Nyam Pizza",
     niche: "Піцерія · доставка їжі",
+    image: "/images/nyam-pizza.webp",
     description:
       "Сайт піцерії з онлайн-меню, адмін-панеллю та можливістю оформити замовлення. Адаптивна верстка.",
     task: "Замовлення приймали в директі та по телефону — меню доводилось диктувати вручну.",
@@ -17,6 +18,7 @@ export const projects: Project[] = [
     id: "svitlachok-website",
     title: "Svitlachok",
     niche: "Бренд · товари",
+    image: "/images/svitlachok.webp",
     description:
       "Сучасний сайт для бренду Світлячок. TypeScript, акцент на анімаціях та UX.",
     task: "Бренду потрібна була присутність в інтернеті, яка виглядає дорожче за конкурентів.",
@@ -29,6 +31,7 @@ export const projects: Project[] = [
     id: "nigel-braithwaite-housing",
     title: "Nigel Braithwaite",
     niche: "Нерухомість · агентство",
+    image: "/images/nigel.webp",
     description:
       "Лендінг агентства нерухомості з каталогом об'єктів та формою зв'язку.",
     task: "Об'єкти показували розрізненими фото — не було де подивитись усе одразу.",
@@ -38,21 +41,10 @@ export const projects: Project[] = [
     liveUrl: "https://pog-nazar.github.io/nigel-braithwaite-housing/",
   },
   {
-    id: "faceNbody",
-    title: "Face & Body",
-    niche: "Школа масажу · навчання",
-    description:
-      "Сайт школи масажу: програми курсів, викладачі, онлайн-запис та держдиплом.",
-    task: "Треба було пояснити програму курсів і зняти сумніви щодо цінності навчання.",
-    solution:
-      "Сторінка з програмами, викладачами та інформацією про диплом державного зразка. Запис на курс через форму.",
-    tags: ["HTML", "CSS"],
-    liveUrl: "https://pog-nazar.github.io/faceNbody/",
-  },
-  {
     id: "massage-website",
     title: "Serenity Salon",
     niche: "Масажний салон · Київ",
+    image: "/images/serenity.webp",
     description:
       "Преміум масажний салон у Києві: послуги, ціни та онлайн-запис до спеціаліста.",
     task: "Клієнти не бачили вартості послуг і йшли до салонів, де ціни вказані відкрито.",
