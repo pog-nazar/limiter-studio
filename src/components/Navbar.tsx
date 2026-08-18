@@ -20,7 +20,7 @@ export function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-ink/85 backdrop-blur-md border-b border-white/[0.08]" : ""
+        scrolled ? "bg-ink/95 md:bg-ink/85 md:backdrop-blur-md border-b border-white/[0.08]" : ""
       }`}
     >
       <div className={`${CONTAINER} h-16 flex items-center justify-between`}>

@@ -1,9 +1,32 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
+const QUERY = "(hover: hover)";
+
+/** Чи є в пристрою справжній курсор. На сервері вважаємо, що ні. */
+function usePointerFine() {
+  return useSyncExternalStore(
+    (onChange) => {
+      const mq = window.matchMedia(QUERY);
+      mq.addEventListener("change", onChange);
+      return () => mq.removeEventListener("change", onChange);
+    },
+    () => window.matchMedia(QUERY).matches,
+    () => false,
+  );
+}
+
 export function CustomCursor() {
+  /**
+   * На тачскріні не рендеримо НІЧОГО. Раніше вимикались лише обробники,
+   * а самі елементи лишались — і фіксований шар із mix-blend-difference
+   * змушував Safari перемальовувати всю сторінку окремим композитним шаром.
+   * Це була головна причина повільного завантаження на iPhone.
+   */
+  const pointerFine = usePointerFine();
+
   const dotX = useMotionValue(-100);
   const dotY = useMotionValue(-100);
   const ringX = useMotionValue(-100);
@@ -17,8 +40,7 @@ export function CustomCursor() {
   const ringSizeSpring = useSpring(ringSize, { stiffness: 200, damping: 22 });
 
   useEffect(() => {
-    const isTouchDevice = window.matchMedia("(hover: none)").matches;
-    if (isTouchDevice) return;
+    if (!pointerFine) return;
 
     const onMove = (e: MouseEvent) => {
       dotX.set(e.clientX);
@@ -59,7 +81,9 @@ export function CustomCursor() {
       window.removeEventListener("mousemove", onMove);
       observer.disconnect();
     };
-  }, [dotX, dotY, ringX, ringY, ringSize]);
+  }, [pointerFine, dotX, dotY, ringX, ringY, ringSize]);
+
+  if (!pointerFine) return null;
 
   return (
     <>

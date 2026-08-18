@@ -18,8 +18,14 @@ export function Hero() {
     <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden">
       {/* Subtle ambient glow */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] rounded-full bg-white/[0.025] blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/[0.06] blur-[100px]" />
+        <div
+          className="absolute top-1/3 left-1/4 w-[600px] h-[600px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(255,255,255,0.045) 0%, transparent 70%)" }}
+        />
+        <div
+          className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(245,158,11,0.10) 0%, transparent 70%)" }}
+        />
       </div>
 
       <div className={`${CONTAINER} flex-1 flex flex-col justify-center w-full pt-24 pb-10 relative`}>

@@ -19,8 +19,14 @@ export function LpHero() {
     <section className="relative overflow-hidden">
       {/* Ambient glow */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-20 left-1/4 w-[600px] h-[600px] rounded-full bg-white/[0.025] blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/[0.07] blur-[100px]" />
+        <div
+          className="absolute -top-20 left-1/4 w-[600px] h-[600px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(255,255,255,0.045) 0%, transparent 70%)" }}
+        />
+        <div
+          className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%)" }}
+        />
       </div>
 
       <div className={`${CONTAINER} relative pt-28 pb-16 sm:pt-32 sm:pb-24`}>

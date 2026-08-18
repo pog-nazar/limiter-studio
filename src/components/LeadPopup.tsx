@@ -125,7 +125,7 @@ export function LeadPopup() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
           onClick={close}
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm overflow-y-auto"
+          className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80 lg:backdrop-blur-sm overflow-y-auto"
         >
           <motion.div
             ref={dialogRef}

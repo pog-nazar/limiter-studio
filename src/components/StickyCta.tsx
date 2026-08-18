@@ -42,7 +42,7 @@ export function StickyCta() {
           animate={{ y: 0 }}
           exit={{ y: "110%" }}
           transition={{ duration: 0.3, ease: EASE }}
-          className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-ink/95 backdrop-blur-md border-t border-white/[0.12] px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]"
+          className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-ink border-t border-white/[0.12] px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]"
         >
           <div className="flex items-center gap-3">
             <a
