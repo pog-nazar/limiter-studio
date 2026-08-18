@@ -71,9 +71,11 @@ export function LeadForm({
       setDone(true);
     } catch (err) {
       if (err instanceof LeadError && err.kind === "throttled") {
-        setFailed("Заявку вже надіслано. Якщо це помилка — напишіть у Telegram.");
+        setFailed("Заявку вже прийнято щойно — дублювати не потрібно. Якщо це помилка, напишіть у Telegram.");
+      } else if (err instanceof LeadError && err.kind === "not-configured") {
+        setFailed("Форма тимчасово недоступна. Напишіть, будь ласка, у Telegram — відповім одразу.");
       } else {
-        setFailed("Не вдалося надіслати. Напишіть, будь ласка, у Telegram — відповім одразу.");
+        setFailed("Не вдалося надіслати — схоже, проблема зі зв'язком. Спробуйте ще раз або напишіть у Telegram.");
       }
     } finally {
       setSubmitting(false);

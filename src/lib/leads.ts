@@ -10,10 +10,14 @@ const ENDPOINT = process.env.NEXT_PUBLIC_LEADS_ENDPOINT ?? "";
 /** Не робить ендпоінт приватним — лише відсікає ботів, що б'ють у знайдений URL. */
 const SECRET = process.env.NEXT_PUBLIC_LEADS_SECRET ?? "";
 
-/** Швидше за це форму заповнює тільки бот. */
+/**
+ * Мінімальний час від показу форми до відправки. Швидше заповнює тільки скрипт.
+ * Але людину за це НЕ караємо: якщо не вистачило — просто чекаємо залишок
+ * і відправляємо. Помилка тут коштувала б реальних заявок.
+ */
 const MIN_FILL_MS = 3000;
-/** Не більше однієї заявки на хвилину з одного браузера. */
-const THROTTLE_MS = 60_000;
+/** Захист від подвійного натискання й від залпу з одного браузера. */
+const THROTTLE_MS = 20_000;
 const THROTTLE_KEY = "lp:last-lead";
 
 export interface LeadPayload {
@@ -26,7 +30,7 @@ export interface LeadPayload {
 export class LeadError extends Error {
   constructor(
     message: string,
-    readonly kind: "throttled" | "bot" | "network" | "not-configured",
+    readonly kind: "throttled" | "network" | "not-configured",
   ) {
     super(message);
     this.name = "LeadError";
@@ -81,12 +85,14 @@ export async function submitLead(
     return;
   }
 
-  if (Date.now() - openedAt < MIN_FILL_MS) {
-    throw new LeadError("Форма заповнена надто швидко", "bot");
+  if (throttled()) {
+    throw new LeadError("Заявку вже надіслано", "throttled");
   }
 
-  if (throttled()) {
-    throw new LeadError("Заявку вже надіслано. Зачекайте хвилину.", "throttled");
+  // Не відмова, а пауза: дочікуємо залишок і йдемо далі.
+  const waited = Date.now() - openedAt;
+  if (waited < MIN_FILL_MS) {
+    await new Promise((r) => setTimeout(r, MIN_FILL_MS - waited));
   }
 
   if (!ENDPOINT) {
