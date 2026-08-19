@@ -4,13 +4,17 @@ import { FB_PIXEL_ID } from "@/lib/fbq";
 /**
  * Без NEXT_PUBLIC_FB_PIXEL_ID нічого не рендериться — сайт спокійно працює
  * і в дев-режимі, і до того, як піксель заведуть у Meta Business.
+ *
+ * strategy="beforeInteractive" ставить снипет у <head> початкового HTML, як і
+ * рекомендує Meta. Працює лише з кореневого layout — не переносити компонент
+ * у сторінку.
  */
 export function FacebookPixel() {
   if (!FB_PIXEL_ID) return null;
 
   return (
     <>
-      <Script id="fb-pixel" strategy="afterInteractive">
+      <Script id="fb-pixel" strategy="beforeInteractive">
         {`!function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
