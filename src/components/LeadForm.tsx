@@ -5,7 +5,6 @@ import Link from "next/link";
 import { submitLead, LeadError } from "@/lib/leads";
 import { validateLead, hasErrors, type LeadErrors, type LeadValues } from "@/lib/validate";
 import { trackLead } from "@/lib/fbq";
-import { gaLead } from "@/lib/gtag";
 import { TELEGRAM_URL } from "@/lib/constants";
 
 const EMPTY: LeadValues = { name: "", contact: "", niche: "", website: "" };
@@ -67,13 +66,10 @@ export function LeadForm({
         openedAt.current,
       );
       trackLead(formId);
-      gaLead(formId);
       setDone(true);
     } catch (err) {
       if (err instanceof LeadError && err.kind === "throttled") {
         setFailed("Заявку вже прийнято щойно — дублювати не потрібно. Якщо це помилка, напишіть у Telegram.");
-      } else if (err instanceof LeadError && err.kind === "not-configured") {
-        setFailed("Форма тимчасово недоступна. Напишіть, будь ласка, у Telegram — відповім одразу.");
       } else {
         setFailed("Не вдалося надіслати — схоже, проблема зі зв'язком. Спробуйте ще раз або напишіть у Telegram.");
       }

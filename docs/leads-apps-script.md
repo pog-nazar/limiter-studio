@@ -146,21 +146,17 @@ Deploy → New deployment → тип **Web app**:
 
 Скопіюйте URL виду `https://script.google.com/macros/s/.../exec`.
 
-## 5. Змінні оточення
+## 5. Значення в коді
 
-Локально — у `.env.local`, на Netlify — Site settings → Environment variables.
-Повний список є в `.env.local.example`:
+Змінних оточення немає — адреса скрипта й пароль вшиті прямо в
+`src/lib/leads.ts`, ID пікселя в `src/lib/fbq.ts`.
 
-```
-NEXT_PUBLIC_SITE_URL=https://limiter-studio.netlify.app
-NEXT_PUBLIC_LEADS_ENDPOINT=https://script.google.com/macros/s/.../exec
-NEXT_PUBLIC_LEADS_SECRET=той_самий_рядок_що_і_в_SECRET
-NEXT_PUBLIC_FB_PIXEL_ID=1234567890
-NEXT_PUBLIC_GA_ID=G-XXXXXXX
-```
+Це усвідомлений вибір заради простоти: нема чого налаштовувати в Netlify
+і неможливо забути про повторний деплой після зміни змінної. Ці значення
+в будь-якому разі потрапляють у код сторінки, тож на рівні захисту нічого
+не змінюється — справжній захист це перевірки на боці Apps Script.
 
-Змінні `NEXT_PUBLIC_*` вшиваються у бандл під час білду — після їх зміни на
-Netlify потрібен новий деплой, перезапуску недостатньо.
+Змінити адресу скрипта або пароль = правка в коді + звичайний `git push`.
 
 ## 6. Перевірка
 

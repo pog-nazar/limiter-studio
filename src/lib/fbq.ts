@@ -1,4 +1,5 @@
-export const FB_PIXEL_ID = process.env.NEXT_PUBLIC_FB_PIXEL_ID ?? "";
+/** Meta Pixel. Публічне значення — видно у вихідному коді будь-якого сайту з рекламою. */
+export const FB_PIXEL_ID = "1068404232252642";
 
 type Fbq = (
   action: "track" | "trackCustom" | "init",

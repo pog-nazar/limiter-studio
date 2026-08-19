@@ -6,9 +6,15 @@
  * спам. Валідація на боці Apps Script обов'язкова, див. docs/leads-apps-script.md.
  */
 
-const ENDPOINT = process.env.NEXT_PUBLIC_LEADS_ENDPOINT ?? "";
-/** Не робить ендпоінт приватним — лише відсікає ботів, що б'ють у знайдений URL. */
-const SECRET = process.env.NEXT_PUBLIC_LEADS_SECRET ?? "";
+/** Apps Script, який пише заявки в Google Таблицю. Див. docs/leads-apps-script.md */
+const ENDPOINT =
+  "https://script.google.com/macros/s/AKfycbwIJFXB5t-TQsLbrCggEslmj-MRza7GUacQCqFZmsUHHqESGSyM_MuGMhHrY_qb9Ck7/exec";
+
+/**
+ * Пароль, який перевіряє скрипт. Не таємниця: він у будь-якому разі потрапляє
+ * в код сторінки. Його роль — відсікати ботів, що б'ють у знайдений URL навмання.
+ */
+const SECRET = "lgh12356lm";
 
 /**
  * Мінімальний час від показу форми до відправки. Швидше заповнює тільки скрипт.
@@ -30,7 +36,7 @@ export interface LeadPayload {
 export class LeadError extends Error {
   constructor(
     message: string,
-    readonly kind: "throttled" | "network" | "not-configured",
+    readonly kind: "throttled" | "network",
   ) {
     super(message);
     this.name = "LeadError";
@@ -93,10 +99,6 @@ export async function submitLead(
   const waited = Date.now() - openedAt;
   if (waited < MIN_FILL_MS) {
     await new Promise((r) => setTimeout(r, MIN_FILL_MS - waited));
-  }
-
-  if (!ENDPOINT) {
-    throw new LeadError("NEXT_PUBLIC_LEADS_ENDPOINT не налаштовано", "not-configured");
   }
 
   const body = JSON.stringify({

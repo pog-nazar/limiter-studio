@@ -2,12 +2,15 @@ import Script from "next/script";
 import { FB_PIXEL_ID } from "@/lib/fbq";
 
 /**
- * Без NEXT_PUBLIC_FB_PIXEL_ID нічого не рендериться — сайт спокійно працює
- * і в дев-режимі, і до того, як піксель заведуть у Meta Business.
+ * Meta Pixel. ID вшитий у код (див. lib/fbq.ts) — жодних змінних оточення.
+ * Порожній ID лишає компонент вимкненим, тож піксель легко тимчасово зняти.
  *
- * strategy="beforeInteractive" ставить снипет у <head> початкового HTML, як і
- * рекомендує Meta. Працює лише з кореневого layout — не переносити компонент
- * у сторінку.
+ * strategy="beforeInteractive" — снипет виконується до гідратації, раніше за
+ * будь-який наш код. Працює лише з кореневого layout, не переносити у сторінку.
+ *
+ * Увага: при output: "export" Next кладе його не в <head>, як обіцяє
+ * документація, а в кінець <body>. Перевірено на збірці. На роботу пікселя це
+ * не впливає — PageView і Lead фіксуються, — але «як рекомендує Meta» це не є.
  */
 export function FacebookPixel() {
   if (!FB_PIXEL_ID) return null;

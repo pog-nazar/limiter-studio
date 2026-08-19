@@ -4,7 +4,6 @@ import "./globals.css";
 import { CustomCursor } from "@/components/CustomCursor";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { FacebookPixel } from "@/components/FacebookPixel";
-import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { MotionProvider } from "@/components/MotionProvider";
 import { SITE_URL } from "@/lib/constants";
 
@@ -43,7 +42,6 @@ export default function RootLayout({
     <html lang="uk" data-scroll-behavior="smooth" className={`${inter.variable}`}>
       <body className="min-h-screen bg-ink text-white antialiased">
         <FacebookPixel />
-        <GoogleAnalytics />
         <MotionProvider>
           <ScrollProgress />
           <CustomCursor />
